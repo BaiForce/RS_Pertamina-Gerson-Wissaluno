@@ -1,0 +1,113 @@
+:root {
+    --rs-white: #ffffff;
+    --rs-primary: #f472b7; /* Warna putih */
+    --rs-secondary: #5e72e4; /* Warna ungu sesuai permintaan */
+}
+
+.bg-rest {
+    background: var(--rs-primary);
+    background: -moz-linear-gradient(330deg, var(--rs-secondary) 10%, var(--rs-white) 90%);
+    background: -webkit-linear-gradient(
+        330deg,
+        var(--rs-secondary) 20%,
+        var(--rs-white) 90%
+    );
+    background: linear-gradient(330deg, var(--rs-secondary) 10%, var(--rs-white) 90%);
+}
+
+.navbar.fixed-bottom {
+    position: fixed; /* Fix the navbar at the bottom */
+    width: 101%; /* Take full width of the screen */
+    bottom: 0; /* Stick to the bottom of the viewport */
+    background: var(--rs-secondary); /* Ubah background jadi ungu penuh */
+}
+
+/* Adjust appearance for different screen sizes */
+@media (min-width: 768px) {
+    .navbar.fixed-bottom {
+        border-radius: 0; /* Remove border radius for larger screens */
+    }
+}
+
+@media (max-width: 767.98px) {
+    .navbar.fixed-bottom .nav-link {
+        padding: 0.5rem; /* Adjust padding for smaller screens */
+    }
+}
+
+@media (max-width: 1024px) {
+    .navbar {
+        left: 0px;
+        right: 0;
+    }
+}
+
+.navbar.fixed-bottom .nav-link {
+    font-weight: 600;
+}
+
+.navbar.fixed-bottom .nav-link .nav-icon {
+    text-align: center;
+    height: 2.5rem;
+    padding: 0.5rem;
+    border-radius: 1.25rem;
+    margin-bottom: -3px;
+    max-width: 6rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar.fixed-bottom .nav-link .nav-icon svg {
+    height: 1.5rem;
+}
+
+.navbar.fixed-bottom .nav-link.active .nav-icon,
+.navbar.fixed-bottom .nav-link:hover .nav-icon {
+    background: var(--rs-secondary); /* Ubah background jadi ungu penuh */
+}
+
+.navbar.fixed-bottom .nav-link.active .nav-icon svg,
+.navbar.fixed-bottom .nav-link:hover .nav-icon svg {
+    stroke: var(--rs-white);
+}
+
+.image-preview,
+#callback-preview {
+    width: 250px;
+    height: 250px;
+    border: 2px dashed #ddd;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    background-color: #ffffff;
+    color: #ecf0f1;
+}
+
+.image-preview input,
+#callback-preview input {
+    line-height: 200px;
+    font-size: 200px;
+    position: absolute;
+    opacity: 0;
+    z-index: 10;
+}
+
+.image-preview label,
+#callback-preview label {
+    position: absolute;
+    z-index: 5;
+    opacity: 0.8;
+    cursor: pointer;
+    background-color: #bdc3c7;
+    width: 150px;
+    height: 50px;
+    font-size: 12px;
+    line-height: 50px;
+    text-transform: uppercase;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+}

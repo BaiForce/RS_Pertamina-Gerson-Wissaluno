@@ -25,9 +25,7 @@
     Route::get('/', function () {
         return view('auth/login');
     });
-    Route::get('/home', [AdminController::class, 'index'])->name('admin.dashboard')->middleware(['auth', 'admin']);
-    Route::get('/home', [UserHomeController::class, 'index'])->name('konsumen.dashboard')->middleware(['auth', 'konsumen']);
-    // Route::get('/home', [UserHomeController::class, 'index'])->name('konsumen.dashboard')->middleware(['auth', 'konsumen']);
+    Route::get('/home', [AdminController::class, 'index'])->name('home')->middleware(['auth', 'admin']);
 
     Auth::routes();
 
@@ -35,7 +33,7 @@
         'prefix' => 'admin',
         'middleware' => ['auth', 'admin']
     ], function () {
-        Route::get('/home', [AdminController::class, 'index'])->name('admin.dashboard');
+        Route::get('/home', [AdminController::class, 'index'])->name('home');
 
         Route::prefix('drivers')->group(function () {
             Route::get('/list', [DriveController::class, 'index'])->name('drivers.index');
@@ -62,7 +60,5 @@
         });
         Route::prefix('report')->group(function () {
             Route::get('/list', [ReportController::class, 'index'])->name('reports.index');
-            Route::get('/driver-charts', [DriverChartController::class, 'driverDistanceCostChart'])
-                ->name('reports.driver_distance_cost');
         });
     });

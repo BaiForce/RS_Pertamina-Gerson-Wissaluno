@@ -3,24 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Driver;
+use App\Models\Transaction;
+use App\Models\Rute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class ReportController extends Controller
 {
+    // app/Http/Controllers/ReportController.php
     public function index()
     {
         Log::info('Masuk ke ReportController@index');
 
-        // Ambil semua driver dan relasi transactions dan rute
-        $drivers = Driver::with('transactions.rute')->get();
+        // Ambil semua driver dengan relasi yang diperlukan
+        $drivers = Driver::with(['transactions' => function ($query) {
+            $query->with('rute'); // Pastikan rute dimuat
+        }])->get();
 
-        // 1. Hitung jumlah trip per driver
+        // 1. Hitung jumlah trip per driver menggunakan accessor
         $tripCounts = $drivers->map(function ($driver) {
             return [
                 'id' => $driver->id,
                 'name' => $driver->name,
                 'total_trip' => $driver->transactions->count(),
+                'total_distance' => $driver->total_distance, // Gunakan accessor
+                'total_cost' => $driver->total_cost, // Gunakan accessor
+                'total_late' => $driver->total_late // Gunakan accessor
             ];
         });
 
@@ -28,7 +36,7 @@ class ReportController extends Controller
         $lateCounts = $drivers->map(function ($driver) {
             return [
                 'driver' => $driver,
-                'total_late' => $driver->transactions->sum('late'),
+                'total_late' => $driver->total_late, // Gunakan accessor
             ];
         })->sortByDesc('total_late')->values();
 
@@ -39,7 +47,7 @@ class ReportController extends Controller
         $costCounts = $drivers->map(function ($driver) {
             return [
                 'driver' => $driver,
-                'total_cost' => $driver->transactions->sum('total_cost'),
+                'total_cost' => $driver->total_cost, // Gunakan accessor
             ];
         })->sortByDesc('total_cost')->values();
 
@@ -49,9 +57,7 @@ class ReportController extends Controller
         $distanceCounts = $drivers->map(function ($driver) {
             return [
                 'driver' => $driver,
-                'total_distance' => $driver->transactions->sum(function ($t) {
-                    return $t->rute->distance ?? 0;
-                }),
+                'total_distance' => $driver->total_distance, // Gunakan accessor
             ];
         })->sortByDesc('total_distance')->values();
 
@@ -61,10 +67,8 @@ class ReportController extends Controller
         $chartData = $drivers->map(function ($driver) {
             return [
                 'name' => $driver->name,
-                'distance' => $driver->transactions->sum(function ($t) {
-                    return $t->rute->distance ?? 0;
-                }),
-                'cost' => $driver->transactions->sum('total_cost'),
+                'distance' => $driver->total_distance, // Gunakan accessor
+                'cost' => $driver->total_cost, // Gunakan accessor
             ];
         });
 

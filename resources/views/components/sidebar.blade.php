@@ -1,7 +1,7 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a class="nav-link" href="{{ url('home') }}">Sahabat E-BIKE</a>
+            <a class="nav-link" href="{{ url('home') }}">RSPB</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="index.html">SE</a>

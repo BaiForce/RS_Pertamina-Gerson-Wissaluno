@@ -49,26 +49,6 @@ class Transaction extends Model
     }
 
 
-    // protected static function boot()
-    // {
-    //     parent::boot();
-
-    //     static::saving(function ($model) {
-    //         // Hitung keterlambatan
-    //         $model->late = max(0, $model->actual_time - $model->standard_time);
-
-    //         // Ambil harga per km dari relasi rute
-    //         if ($model->rute) {
-    //             $pricePerKm = $model->rute->price_per_km;
-    //             $distance = $model->rute->distance;
-
-    //             // Total cost = distance x price/km
-    //             $model->total_cost = $distance * $pricePerKm;
-    //         }
-    //     });
-    // }
-
-
     /**
      * Get the driver for this transaction
      */

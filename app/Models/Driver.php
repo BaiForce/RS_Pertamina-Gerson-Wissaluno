@@ -28,8 +28,12 @@ class Driver extends Model
      */
     public function getTotalDistanceAttribute(): int
     {
-        return $this->transactions->sum(function($transaction) {
-            return $transaction->route->distance;
+        return $this->transactions->sum(function ($transaction) {
+            // Pastikan relasi rute dimuat dan ada
+            if ($transaction->relationLoaded('rute') && $transaction->rute) {
+                return $transaction->rute->distance;
+            }
+            return 0;
         });
     }
 

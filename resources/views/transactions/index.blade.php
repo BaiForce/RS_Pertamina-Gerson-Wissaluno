@@ -49,6 +49,7 @@
                                                 <th>Driver</th>
                                                 <th>Rute</th>
                                                 <th>Tanggal</th>
+                                                <th>Jarak</th>
                                                 <th>Waktu Aktual (menit)</th>
                                                 <th>Waktu Standar (menit)</th>
                                                 <th>Total Biaya</th>
@@ -64,6 +65,7 @@
                                                     <td>{{ $transaction->rute->start_point }} -->
                                                         {{ $transaction->rute->end_point }}</td>
                                                     <td>{{ $transaction->date }}</td>
+                                                    <td>{{ $transaction->rute->distance }}</td>
                                                     <td>{{ $transaction->actual_time }}</td>
                                                     <td>{{ $transaction->standard_time }}</td>
                                                     <td>Rp {{ number_format($transaction->total_cost, 0, ',', '.') }}</td>

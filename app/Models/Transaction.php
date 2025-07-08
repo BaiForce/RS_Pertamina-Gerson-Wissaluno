@@ -28,11 +28,46 @@ class Transaction extends Model
     {
         parent::boot();
 
-        // Automatically calculate late minutes when saving
         static::saving(function ($model) {
-            $model->late = max(0, $model->actual_time - $model->standard_time);
+            // Pastikan relasi rute sudah diload
+            if (!$model->relationLoaded('rute')) {
+                $model->load('rute');
+            }
+
+            if ($model->rute) {
+                // Ambil nilai dari rute
+                $rute = $model->rute;
+                $model->standard_time = $rute->standard_time;
+
+                // Hitung keterlambatan
+                $model->late = max(0, $model->actual_time - $rute->standard_time);
+
+                // Hitung total_cost = jarak * harga per km
+                $model->total_cost = $rute->distance * $rute->price_per_km;
+            }
         });
     }
+
+
+    // protected static function boot()
+    // {
+    //     parent::boot();
+
+    //     static::saving(function ($model) {
+    //         // Hitung keterlambatan
+    //         $model->late = max(0, $model->actual_time - $model->standard_time);
+
+    //         // Ambil harga per km dari relasi rute
+    //         if ($model->rute) {
+    //             $pricePerKm = $model->rute->price_per_km;
+    //             $distance = $model->rute->distance;
+
+    //             // Total cost = distance x price/km
+    //             $model->total_cost = $distance * $pricePerKm;
+    //         }
+    //     });
+    // }
+
 
     /**
      * Get the driver for this transaction

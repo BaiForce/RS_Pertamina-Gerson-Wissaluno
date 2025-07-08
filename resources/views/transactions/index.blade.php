@@ -52,6 +52,7 @@
                                                 <th>Waktu Aktual (menit)</th>
                                                 <th>Waktu Standar (menit)</th>
                                                 <th>Total Biaya</th>
+                                                <th>Total Keterlambatan</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -66,6 +67,7 @@
                                                     <td>{{ $transaction->actual_time }}</td>
                                                     <td>{{ $transaction->standard_time }}</td>
                                                     <td>Rp {{ number_format($transaction->total_cost, 0, ',', '.') }}</td>
+                                                    <td>{{ $transaction->late }}</td>
                                                     <td>
                                                         <a class="btn btn-success btn-sm"
                                                             href="{{ route('transactions.edit', $transaction->id) }}">
@@ -169,29 +171,7 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
-                            <label for="standard_time">Waktu Standar (menit)</label>
-                            <input type="number" class="form-control @error('standard_time') is-invalid @enderror"
-                                id="standard_time" name="standard_time" value="{{ old('standard_time') }}" required
-                                min="1">
-                            @error('standard_time')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
 
-                        <div class="form-group">
-                            <label for="total_cost">Total Biaya</label>
-                            <input type="number" class="form-control @error('total_cost') is-invalid @enderror"
-                                id="total_cost" name="total_cost" value="{{ old('total_cost') }}" required
-                                min="1">
-                            @error('total_cost')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

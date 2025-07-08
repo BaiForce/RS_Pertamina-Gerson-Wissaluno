@@ -23,10 +23,13 @@ class Rute extends Model
     {
         parent::boot();
 
-        // Automatically calculate total cost when saving
         static::saving(function ($model) {
             $model->total_cost = $model->distance * $model->price_per_km;
         });
+        // static::saving(function ($model) {
+        //     // Perhitungan total_cost berdasarkan (jarak + waktu) * harga per km
+        //     $model->total_cost = ($model->distance + $model->standard_time) * $model->price_per_km;
+        // });
     }
 
     /**

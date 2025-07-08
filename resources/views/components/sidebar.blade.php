@@ -1,7 +1,7 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-        <a class="nav-link" href="{{ url('home') }}">Sahabat E-BIKE</a>
+            <a class="nav-link" href="{{ url('home') }}">Sahabat E-BIKE</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="index.html">SE</a>
@@ -11,34 +11,25 @@
             <li class="{{ Request::is('home') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('home') }}"><i class="fas fa-columns"></i> <span>Dashboard</span></a>
             </li>
-            <li class="menu-header">Kelola User</li>
-            <li class="{{ Request::is('admin/user/list') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('admin/user/list') }}"><i class="fas fa-user"></i> <span>Kelola
-                        User</span></a>
+            <li class="menu-header">Kelola Driver</li>
+            <li class="{{ Request::is('admin/drivers/list') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('admin/drivers/list') }}"><i class="fas fa-user"></i> <span>Kelola
+                        Driver</span></a>
             </li>
-            <li class="menu-header">Kelola Sepeda</li>
-            <li class="{{ Request::is('admin/tipeSepeda/list') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('admin/tipeSepeda/list') }}"><i class="fas fa-book"></i> <span>Tipe
-                        Sepeda</span></a>
-            </li>
-            <li class="{{ Request::is('admin/durasiSewa/list') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('admin/durasiSewa/list') }}"><i class="fas fa-clock"></i>
-                    <span>Durasi
-                        Sewa</span></a>
-            </li>
-            <li class="{{ Request::is('admin/sepeda/list') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('admin/sepeda/list') }}"><i class="fas fa-bicycle"></i>
-                    <span>Sepeda</span></a>
+            <li class="menu-header">Kelola Rutes</li>
+            <li class="{{ Request::is('admin/rutes/list') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('admin/rutes/list') }}"><i class="fas fa-book"></i> <span>Kelola
+                        Rutes</span></a>
             </li>
             <li class="menu-header">Kelola Transaksi</li>
-            <li class="{{ Request::is('admin/transaksi/list') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('admin/transaksi/list') }}"><i class="far fa-file-alt"></i>
+            <li class="{{ Request::is('admin/transactions/list') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('admin/transactions/list') }}"><i class="far fa-file-alt"></i>
                     <span>Kelola
                         Transaksi</span></a>
             </li>
             <li class="menu-header">Report</li>
-            <li class="{{ Request::is('admin/laporan/list') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ url('admin/laporan/list') }}"><i class="far fa-paste"></i>
+            <li class="{{ Request::is('admin/report/list') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('admin/report/list') }}"><i class="far fa-paste"></i>
                     <span>Laporan</span></a>
             </li>
         </ul>

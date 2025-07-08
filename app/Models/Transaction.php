@@ -4,60 +4,58 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Transaction extends Model
 {
     use HasFactory;
-    protected $guarded = [];
-    public const PAYMENT_CHANNELS = [
-        'credit_card', 'mandiri_clickpay', 'cimb_clicks',
-        'bca_klikbca', 'bca_klikpay', 'bri_epay', 'echannel', 'permata_va',
-        'bca_va', 'bni_va', 'other_va', 'gopay', 'indomaret',
-        'danamon_online', 'akulaku'
+
+    protected $fillable = [
+        'driver_id',
+        'rute_id',
+        'date',
+        'actual_time',
+        'standard_time',
+        'total_cost',
+        'late'
     ];
 
-    public const EXPIRY_DURATION = 1;
-    public const EXPIRY_UNIT = 'days';
+    protected $casts = [
+        'date' => 'datetime'
+    ];
 
-
-    public const CHALLENGE = 'challenge';
-    public const SUCCESS = 'success';
-    public const SETTLEMENT = 'settlement';
-    public const PENDING = 'pending';
-    public const DENY = 'deny';
-    public const EXPIRE = 'expire';
-    public const CANCEL = 'cancel';
-    function generateOrderID($jenis_name)
+    protected static function boot()
     {
-        $prefix = strtoupper($jenis_name); // Get the first letter of the package type
-        $datetime = now()->format('YmdHis');
-        // $unique = uniqid();
-        // Adjust the range as needed
-        $randomNumber = random_int(100, 999);
+        parent::boot();
 
-        $orderID = "{$prefix}_{$datetime}_{$randomNumber}";
-
-        return $orderID;
+        // Automatically calculate late minutes when saving
+        static::saving(function ($model) {
+            $model->late = max(0, $model->actual_time - $model->standard_time);
+        });
     }
 
-    public function user()
+    /**
+     * Get the driver for this transaction
+     */
+
+    public function driver(): BelongsTo
     {
-        return $this->hasOne(User::class, 'id', 'user_id');
+        return $this->belongsTo(Driver::class, 'driver_id');
     }
 
-    public function admin()
+    /**
+     * Get the route for this transaction
+     */ // In Transaction model
+    public function rute(): BelongsTo
     {
-        return $this->hasOne(User::class, 'id', 'admin_id');
+        return $this->belongsTo(Rute::class, 'rute_id');
     }
 
-    public function sepeda()
+    /**
+     * Check if transaction was late
+     */
+    public function getIsLateAttribute(): bool
     {
-        return $this->hasOne(Sepeda::class, 'id', 'bike_id');
+        return $this->late > 0;
     }
-
-    public function duration()
-    {
-        return $this->hasOne(DurasiSewa::class, 'id', 'duration_id');
-    }
-
 }

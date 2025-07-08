@@ -23,40 +23,40 @@ class UserSeeder extends Seeder
         $data->password = Hash::make('admin123');
         $data->save();
 
-        $data = new User();
-        $data->name = 'Konsumen';
-        $data->email = 'konsumen@mail.com';
-        $data->role = 'konsumen';
-        $data->number = '0813500900627';
-        $data->address = 'Jl matahari no 23';
-        $data->password = Hash::make('admin123');
-        $data->save();
+        // $data = new User();
+        // $data->name = 'Konsumen';
+        // $data->email = 'konsumen@mail.com';
+        // $data->role = 'konsumen';
+        // $data->number = '0813500900627';
+        // $data->address = 'Jl matahari no 23';
+        // $data->password = Hash::make('admin123');
+        // $data->save();
 
-        $data = new User();
-        $data->name = 'Andi ';
-        $data->email = 'andi@mail.com';
-        $data->role = 'konsumen';
-        $data->number = '0813500900627';
-        $data->address = 'Jl matahari no 23';
-        $data->password = Hash::make('admin123');
-        $data->save();
+        // $data = new User();
+        // $data->name = 'Andi ';
+        // $data->email = 'andi@mail.com';
+        // $data->role = 'konsumen';
+        // $data->number = '0813500900627';
+        // $data->address = 'Jl matahari no 23';
+        // $data->password = Hash::make('admin123');
+        // $data->save();
 
-        $data = new User();
-        $data->name = 'Staff';
-        $data->email = 'staff@mail.com';
-        $data->role = 'staff';
-        $data->number = '0813500900627';
-        $data->address = 'Jl matahari no 23';
-        $data->password = Hash::make('admin123');
-        $data->save();
+        // $data = new User();
+        // $data->name = 'Staff';
+        // $data->email = 'staff@mail.com';
+        // $data->role = 'staff';
+        // $data->number = '0813500900627';
+        // $data->address = 'Jl matahari no 23';
+        // $data->password = Hash::make('admin123');
+        // $data->save();
 
-        $data = new User();
-        $data->name = 'Staff2';
-        $data->email = 'staff2@mail.com';
-        $data->role = 'staff';
-        $data->number = '0813500900627';
-        $data->address = 'Jl matahari no 23';
-        $data->password = Hash::make('admin123');
-        $data->save();
+        // $data = new User();
+        // $data->name = 'Staff2';
+        // $data->email = 'staff2@mail.com';
+        // $data->role = 'staff';
+        // $data->number = '0813500900627';
+        // $data->address = 'Jl matahari no 23';
+        // $data->password = Hash::make('admin123');
+        // $data->save();
     }
 }
